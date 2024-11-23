@@ -8,8 +8,8 @@ import 'package:gaps_football_app/UserPortal/OtherPages/FaqsPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/GiveFeedbackPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/NotificationsPage.dart';
 import 'package:get/get.dart';
-
-import '../../DialogBoxes/LogoutDialogBox.dart';
+import '../../CommonScreens/welcome.dart';
+import '../../CustomDialogBoxes/logout_dialog.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
@@ -140,7 +140,14 @@ class UserSettingsPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Get.dialog(LogoutDialog());
+                    Get.to(LogoutDialog(
+                      onYesPressed: () {
+                        Get.to(WelcomeScreen());
+                      },
+                      onNoPressed: () {
+                        Get.back();
+                      },
+                    ));
                   },
                 ),
               ),

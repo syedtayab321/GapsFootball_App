@@ -1,12 +1,15 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gaps_football_app/CommonScreens/welcome.dart';
-import 'package:gaps_football_app/UserPortal/UserDashboardPage.dart';
 import 'package:get/get.dart';
-
-import 'CommonScreens/Login.dart';
-void main() {
+import 'firebase_options.dart';
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
       DevicePreview(
           enabled: !kReleaseMode,

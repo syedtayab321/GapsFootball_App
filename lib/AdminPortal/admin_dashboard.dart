@@ -4,9 +4,9 @@ import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:get/get.dart';
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import '../Controllers/bottom_bar_controllers.dart';
-class UserDashboardPage extends StatelessWidget {
-  final UserBottomBarController _controller = Get.put(UserBottomBarController());
-  UserDashboardPage({super.key});
+class AdminDashboardPage extends StatelessWidget {
+  final AdminBottomBarController _controller = Get.put(AdminBottomBarController());
+  AdminDashboardPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +30,8 @@ class UserDashboardPage extends StatelessWidget {
           unselectedItemColor: Colors.black87,
           items: [
             FloatingNavbarItem(icon: FontAwesomeIcons.house, title: 'Home'),
-            FloatingNavbarItem(icon: FontAwesomeIcons.heartCircleBolt, title: 'Favourites'),
-            FloatingNavbarItem(icon: FontAwesomeIcons.cartShopping, title: 'Orders'),
+            FloatingNavbarItem(icon: FontAwesomeIcons.codePullRequest, title: 'Requests'),
+            FloatingNavbarItem(icon: FontAwesomeIcons.message, title: 'Message'),
             FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
           ],
         );
