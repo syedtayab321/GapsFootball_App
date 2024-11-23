@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1027565913417',
     projectId: 'gapsfootball-629d1',
     storageBucket: 'gapsfootball-629d1.firebasestorage.app',
-    iosBundleId: 'com.example.gapsFootballApp',
+    iosBundleId: 'com.example.gaps_football_app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '1027565913417',
     projectId: 'gapsfootball-629d1',
     storageBucket: 'gapsfootball-629d1.firebasestorage.app',
-    iosBundleId: 'com.example.gapsFootballApp',
+    iosBundleId: 'com.example.gaps_football_app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
