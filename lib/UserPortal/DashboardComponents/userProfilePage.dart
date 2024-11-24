@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import 'package:gaps_football_app/UserPortal/OtherPages/AccountSettingsPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/ConversationPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/FaqsPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/GiveFeedbackPage.dart';
-import 'package:gaps_football_app/UserPortal/OtherPages/NotificationsPage.dart';
 import 'package:get/get.dart';
 import '../../CommonScreens/welcome.dart';
 import '../../CustomDialogBoxes/logout_dialog.dart';
@@ -94,22 +92,6 @@ class UserSettingsPage extends StatelessWidget {
                 'Give Feedback',
                     () {
                   Get.to(FeedbackPage());
-                },
-              ),
-              _settingOption(
-                context,
-                FontAwesomeIcons.bell,
-                'Notifications',
-                    () {
-                  Get.to(NotificationsPage());
-                },
-              ),
-              _settingOption(
-                context,
-                FontAwesomeIcons.person,
-                'Account Settings',
-                    () {
-                  Get.to(AccountSettingsPage());
                 },
               ),
               _settingOption(
