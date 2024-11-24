@@ -30,8 +30,8 @@ class UserDashboardPage extends StatelessWidget {
           unselectedItemColor: Colors.black87,
           items: [
             FloatingNavbarItem(icon: FontAwesomeIcons.house, title: 'Home'),
-            FloatingNavbarItem(icon: FontAwesomeIcons.heartCircleBolt, title: 'Favourites'),
             FloatingNavbarItem(icon: FontAwesomeIcons.cartShopping, title: 'Orders'),
+            FloatingNavbarItem(icon: FontAwesomeIcons.message, title: 'Message'),
             FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
           ],
         );

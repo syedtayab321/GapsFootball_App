@@ -61,6 +61,7 @@ class BookNowController extends GetxController {
         'name': nameController.text.trim(),
         'email': emailController.text.trim(),
         'uid': user!.uid,
+        'status':'Pending',
         'created_at': FieldValue.serverTimestamp(),
       };
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gaps_football_app/CommonScreens/SignUpScreen.dart';
-import 'package:gaps_football_app/Controllers/LoginController.dart';
+import 'package:gaps_football_app/Controllers/login_controller.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/ElevatedButton.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';

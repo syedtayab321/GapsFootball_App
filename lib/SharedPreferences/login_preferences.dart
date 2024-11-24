@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gaps_football_app/CommonScreens/welcome.dart';
+import 'package:gaps_football_app/CustomWidgets/Snakbar.dart';
 import 'package:gaps_football_app/Modals/login_modal.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,7 @@ class AuthService {
         return LoginModel.fromFirestore(doc);
       }
     } catch (e) {
-      print('Error getting user role: $e');
+      showErrorSnackbar('Error getting user role: $e');
     }
     return null;
   }

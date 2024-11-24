@@ -1,41 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
 
-class OrdersPage extends StatelessWidget {
-  final List<Map<String, dynamic>> orders = [
-    {
-      "image": "assets/images/onetoone.webp",
-      "title": "Golden Luxury Sofa",
-      "status": "Pending",
-      "price": "\$250",
-      "deliveryTime": "3-5 days",
-    },
-    {
-      "image": "assets/images/onetoone.webp",
-      "title": "Classic Wooden Table",
-      "status": "Accepted",
-      "price": "\$120",
-      "deliveryTime": "2-4 days",
-    },
-    {
-      "image": "assets/images/onetoone.webp",
-      "title": "Elegant Golden Chair",
-      "status": "Delivered",
-      "price": "\$80",
-      "deliveryTime": "1-2 days",
-    },
-    {
-      "image": "assets/images/onetoone.webp",
-      "title": "Premium Office Desk",
-      "status": "Cancelled",
-      "price": "\$350",
-      "deliveryTime": "5-7 days",
-    },
-  ];
+import '../../CustomWidgets/Snakbar.dart';
 
-  OrdersPage({super.key});
+class OrdersPage extends StatefulWidget {
+  const OrdersPage({super.key});
+  @override
+  State<OrdersPage> createState() => _OrdersPageState();
+}
 
+class _OrdersPageState extends State<OrdersPage> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +20,7 @@ class OrdersPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           "My Orders",
           style: TextStyle(
             color: Colors.black,
@@ -53,18 +30,35 @@ class OrdersPage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        itemCount: orders.length,
-        itemBuilder: (context, index) {
-          final order = orders[index];
-          return _orderCard(order);
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance.collection('Orders')
+            .where('uid', isEqualTo: user!.uid).snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text("No orders found"));
+          }
+
+          final orders = snapshot.data!.docs;
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            itemCount: orders.length,
+            itemBuilder: (context, index) {
+              final order = orders[index].data() as Map<String, dynamic>;
+              return _orderCard(order,orders[index].id);
+            },
+          );
         },
       ),
     );
   }
 
-  Widget _orderCard(Map<String, dynamic> order) {
+  Widget _orderCard(Map<String, dynamic> order,String orderId) {
     Color statusColor;
     switch (order["status"]) {
       case "Pending":
@@ -72,9 +66,6 @@ class OrdersPage extends StatelessWidget {
         break;
       case "Accepted":
         statusColor = Colors.blue;
-        break;
-      case "Delivered":
-        statusColor = Color(0xFFD4AF37);
         break;
       case "Cancelled":
         statusColor = Colors.red;
@@ -109,10 +100,12 @@ class OrdersPage extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.asset(
-                      order["image"],
+                      'assets/images/onetoone.webp',
                       height: 100,
                       width: 100,
                       fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.image, size: 100),
                     ),
                   ),
                   const SizedBox(width: 15),
@@ -121,20 +114,14 @@ class OrdersPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextWidget(
-                          title: order["title"],
+                          title: order["serviceDetails"]['type'] ?? "No Title",
                           color: Colors.black,
                           weight: FontWeight.bold,
                           size: 16,
                         ),
                         const SizedBox(height: 5),
                         CustomTextWidget(
-                          title: "Price: ${order["price"]}",
-                          color: Colors.black54,
-                          size: 14,
-                        ),
-                        const SizedBox(height: 5),
-                        CustomTextWidget(
-                          title: "Delivery: ${order["deliveryTime"]}",
+                          title: "Price: ${order["serviceDetails"]['price'] ?? 'N/A'} AED",
                           color: Colors.black54,
                           size: 14,
                         ),
@@ -149,7 +136,7 @@ class OrdersPage extends StatelessWidget {
                             ),
                             const SizedBox(width: 5),
                             CustomTextWidget(
-                              title: order["status"],
+                              title: order["status"] ?? "Unknown",
                               color: statusColor,
                               weight: FontWeight.bold,
                               size: 14,
@@ -167,34 +154,47 @@ class OrdersPage extends StatelessWidget {
                 children: [
                   if (order["status"] == "Pending")
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: ()async {
+                        try {
+                          await FirebaseFirestore.instance.collection('Orders').doc(orderId).update({
+                            'status': 'Canceled',
+                            'canceled_at': FieldValue.serverTimestamp(),
+                          });
+                        } catch (e) {
+                          showErrorSnackbar('Error canceling order: $e');
+                        }
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red.shade700,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: CustomTextWidget(
+                      child: const CustomTextWidget(
                         title: "Cancel Order",
-                        color: Colors.white,
-                        weight: FontWeight.bold,
-                        size: 14,
+                          color: Colors.white,
+                          weight: FontWeight.bold,
+                          size: 14,
                       ),
                     ),
                   if (order["status"] != "Pending")
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Add functionality for deleting the order.
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      child: CustomTextWidget(
-                        title: "Delete",
-                        color: Colors.white,
-                        weight: FontWeight.bold,
-                        size: 14,
+                      child: const Text(
+                        "Delete",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                 ],

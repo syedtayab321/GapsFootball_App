@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import '../../Controllers/HomeController.dart';
+import '../../Controllers/home_controller.dart';
 import '../../CustomWidgets/CustomCards/group_session.dart';
 import '../../CustomWidgets/CustomCards/private_session.dart';
 import '../../CustomWidgets/CustomCards/uniform_booking_card.dart';

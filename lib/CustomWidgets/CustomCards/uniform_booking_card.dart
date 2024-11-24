@@ -65,19 +65,19 @@ class UniformBookingCard extends StatelessWidget {
                   color: Colors.grey,
                 ),
                 const SizedBox(height: 16),
+                userRole == 'admin' ?
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CustomElevatedButton(
-                      text: userRole=='admin' ? 'Delete' : 'Add to Fav',
+                      text: 'Delete',
                       color: Colors.white,
-                      backcolor: userRole == 'admin' ? Colors.red : AppColors.black,
+                      backcolor: Colors.red,
                       padding: 10,
                       radius: 10,
                       width: 130,
                       height: 50,
                       path: ()async{
-                        userRole == 'admin' ?
                         Get.dialog(
                             CustomConfirmationDialog(
                               title: 'Delete',
@@ -88,24 +88,34 @@ class UniformBookingCard extends StatelessWidget {
                               onConfirm: () async {
                                 await controller.deleteService(docId);
                               },
-                            )): Get.to(ViewDetailsPage());
+                            ));
                       },
                     ),
                     CustomElevatedButton(
-                      text: userRole == 'admin' ? 'Update' : 'Book Now',
+                      text: 'Update',
                       color: Colors.white,
-                      backcolor: userRole == 'admin' ? Colors.green : Colors.amber,
+                      backcolor:Colors.green,
                       padding: 10,
                       radius: 10,
                       width: 130,
                       height: 50,
                       path: ()async{
-                        userRole == 'admin'?
-                        Get.to(UpdateBookingForm(docId: docId)):
-                        Get.dialog(BookNowDialog(serviceData: service,));
+                        Get.to(UpdateBookingForm(docId: docId));
                       },
                     ),
                   ],
+                ):
+                CustomElevatedButton(
+                  text: 'Book Now',
+                  color: Colors.white,
+                  backcolor: Colors.amber,
+                  padding: 10,
+                  radius: 10,
+                  width:Get.width,
+                  height: 50,
+                  path: ()async{
+                    Get.dialog(BookNowDialog(serviceData: service,));
+                  },
                 ),
               ],
             ),

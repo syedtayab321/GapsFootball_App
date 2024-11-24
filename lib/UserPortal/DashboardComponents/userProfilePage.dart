@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import 'package:gaps_football_app/UserPortal/OtherPages/ConversationPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/FaqsPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/GiveFeedbackPage.dart';
 import 'package:get/get.dart';
 import '../../CommonScreens/welcome.dart';
 import '../../CustomDialogBoxes/logout_dialog.dart';
+import '../../Messages/conversation_page.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
@@ -99,7 +100,8 @@ class UserSettingsPage extends StatelessWidget {
                 FontAwesomeIcons.message,
                 'Message Admin',
                     () {
-                  Get.to(ConversationPage());
+                  String userId = FirebaseAuth.instance.currentUser!.uid;
+                  Get.to(ConversationPage(chatId: userId,));
                 },
               ),
               SizedBox(height: 30),
