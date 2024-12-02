@@ -5,6 +5,7 @@ import 'package:gaps_football_app/AdminPortal/DashboardPages/order_requests_scre
 import 'package:gaps_football_app/Messages/ChatListPage.dart';
 import 'package:gaps_football_app/UserPortal/DashboardComponents/HomeScreen.dart';
 import 'package:gaps_football_app/UserPortal/DashboardComponents/OwnOrdersPage.dart';
+import 'package:gaps_football_app/UserPortal/DashboardComponents/privacy_policy.dart';
 import 'package:gaps_football_app/UserPortal/DashboardComponents/userProfilePage.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +19,7 @@ class UserBottomBarController extends GetxController {
   final List<Widget> pages = [
       HomeScreen(),
       OrdersPage(),
-      OrdersPage(),
+      PrivacyPolicyPage(),
       UserSettingsPage(),
   ];
 }

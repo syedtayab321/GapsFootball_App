@@ -31,7 +31,7 @@ class UserDashboardPage extends StatelessWidget {
           items: [
             FloatingNavbarItem(icon: FontAwesomeIcons.house, title: 'Home'),
             FloatingNavbarItem(icon: FontAwesomeIcons.cartShopping, title: 'Orders'),
-            FloatingNavbarItem(icon: FontAwesomeIcons.message, title: 'Message'),
+            FloatingNavbarItem(icon: FontAwesomeIcons.penToSquare, title: 'Policy'),
             FloatingNavbarItem(icon: Icons.settings, title: 'Settings'),
           ],
         );
