@@ -1,23 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
+import 'package:gaps_football_app/CustomWidgets/Snakbar.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
+import 'package:gaps_football_app/Messages/conversation_page.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/FaqsPage.dart';
 import 'package:gaps_football_app/UserPortal/OtherPages/GiveFeedbackPage.dart';
 import 'package:get/get.dart';
 import '../../CommonScreens/welcome.dart';
 import '../../CustomDialogBoxes/logout_dialog.dart';
-import '../../Messages/conversation_page.dart';
 
 class UserSettingsPage extends StatelessWidget {
   const UserSettingsPage({super.key});
+
+  void navigateToConversationPage(BuildContext context) async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+
+    try {
+      var userSnapshot = await FirebaseFirestore.instance
+          .collection('Users')
+          .where('uid', isEqualTo: userId)
+          .get();
+      if (userSnapshot.docs.isNotEmpty) {
+        var userData = userSnapshot.docs.first.data();
+         Get.to(
+           ConversationPage(
+               conversationId: userId,
+               senderId: userId,
+               receiverId: 'SeeBS73D3YRTOCZ7plQvBFCHaet1',
+               userName:userData['name'],
+           )
+         );
+      } else {
+        showSuccessSnackbar("User data not found in Firestore.");
+      }
+    } catch (e) {
+      showErrorSnackbar("Error fetching user data: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("User Settings", style: TextStyle(color: Colors.black)),
+        title: CustomTextWidget(title: "User Settings", color: Colors.black),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
@@ -28,7 +56,6 @@ class UserSettingsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Profile Section
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -62,7 +89,7 @@ class UserSettingsPage extends StatelessWidget {
                           ),
                           SizedBox(height: 5),
                           CustomTextWidget(
-                            title: 'Update your profile',
+                            title: 'Welcome to Gaps Football',
                             size: 14,
                             color: Colors.white,
                           ),
@@ -98,10 +125,8 @@ class UserSettingsPage extends StatelessWidget {
               _settingOption(
                 context,
                 FontAwesomeIcons.message,
-                'Message Admin',
-                    () {
-                  String userId = FirebaseAuth.instance.currentUser!.uid;
-                  Get.to(ConversationPage(chatId: userId,));
+                'Message Admin', () {
+                 navigateToConversationPage(context);
                 },
               ),
               SizedBox(height: 30),

@@ -12,7 +12,7 @@ class AdminDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: AppColors.lightGolden,
+      backgroundColor: Colors.amber.shade700,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

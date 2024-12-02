@@ -23,7 +23,6 @@ class AdminHomeScreen extends StatelessWidget {
           weight: FontWeight.w500,
         ),
       ),
-      drawer: AdminDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Column(
@@ -54,11 +53,11 @@ class AdminHomeScreen extends StatelessWidget {
                       String type = service['type'] ?? '';
                       String docId = services[index].id;
                       if (type == 'Uniform Booking') {
-                        return UniformBookingCard(service: service,docId:docId,userRole: 'users',);
+                        return UniformBookingCard(service: service,docId:docId,userRole: 'admin',);
                       } else if (type == 'Private One-on-One Session') {
-                        return PrivateSessionCard(service:service,docId:docId,userRole: 'users',);
+                        return PrivateSessionCard(service:service,docId:docId,userRole: 'admin',);
                       } else if (type == 'Group Session Booking') {
-                        return GroupSessionCard(service: service,docId:docId,userRole: 'users',);
+                        return GroupSessionCard(service: service,docId:docId,userRole: 'admin',);
                       } else {
                         return SizedBox();
                       }
