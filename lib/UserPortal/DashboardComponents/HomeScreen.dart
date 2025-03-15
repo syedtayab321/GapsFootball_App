@@ -105,10 +105,10 @@ class FilterButton extends StatelessWidget {
   final FilterController filterController;
 
   const FilterButton({
-    Key? key,
+    super.key,
     required this.filter,
     required this.filterController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

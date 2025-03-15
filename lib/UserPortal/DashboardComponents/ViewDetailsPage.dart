@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/ElevatedButton.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import 'package:get/get.dart';
 
 class ViewDetailsPage extends StatelessWidget {
   final String title = "Service Details";
@@ -55,7 +54,7 @@ class ViewDetailsPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.topRight,
                     child: IconButton(
-                      onPressed: (){},
+                      onPressed: () {},
                       icon: Icon(FontAwesomeIcons.heart),
                     ),
                   ),
@@ -78,7 +77,7 @@ class ViewDetailsPage extends StatelessWidget {
                   children: List.generate(5, (index) {
                     return const Icon(
                       Icons.star,
-                      color:AppColors.lightGolden,
+                      color: AppColors.lightGolden,
                       size: 20,
                     );
                   }),
@@ -121,8 +120,7 @@ class ViewDetailsPage extends StatelessWidget {
                       ],
                     ),
                     InkWell(
-                      onTap: (){
-                      },
+                      onTap: () {},
                       child: const Icon(
                         Icons.message,
                         color: AppColors.lightGolden,
@@ -158,7 +156,7 @@ class ViewDetailsPage extends StatelessWidget {
                       backcolor: AppColors.lightGolden,
                       padding: 10,
                       radius: 10,
-                      path: (){},
+                      path: () {},
                     ),
                   ),
                 ],
@@ -169,6 +167,7 @@ class ViewDetailsPage extends StatelessWidget {
       ),
     );
   }
+
   Widget featureTile(String feature) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),

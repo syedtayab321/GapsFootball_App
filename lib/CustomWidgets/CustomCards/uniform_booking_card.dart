@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import '../../AdminPortal/Forms/update_booking_form.dart';
 import '../../CustomDialogBoxes/book_now_dialogbox.dart';
 import '../../CustomWidgets/ElevatedButton.dart';
-import '../../UserPortal/DashboardComponents/ViewDetailsPage.dart';
 
 class UniformBookingCard extends StatelessWidget {
   final Map<String, dynamic> service;

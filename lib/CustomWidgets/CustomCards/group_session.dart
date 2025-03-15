@@ -4,7 +4,6 @@ import 'package:gaps_football_app/CustomDialogBoxes/book_now_dialogbox.dart';
 import 'package:gaps_football_app/CustomWidgets/ElevatedButton.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
-import 'package:gaps_football_app/UserPortal/DashboardComponents/ViewDetailsPage.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../AdminPortal/Controllers/booking_controller.dart';

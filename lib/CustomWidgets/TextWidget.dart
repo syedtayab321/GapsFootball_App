@@ -10,7 +10,7 @@ class CustomTextWidget extends StatelessWidget {
   final TextAlign ? align;
   final double? height;
 
-  const CustomTextWidget({
+  const CustomTextWidget({super.key, 
     required this.title,
     this.color,
     this.size,

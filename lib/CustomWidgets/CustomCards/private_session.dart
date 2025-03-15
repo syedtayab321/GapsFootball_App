@@ -8,7 +8,6 @@ import '../../AdminPortal/Forms/update_booking_form.dart';
 import '../../CustomDialogBoxes/book_now_dialogbox.dart';
 import '../../CustomDialogBoxes/custom_confirmation_dialog.dart';
 import '../../CustomWidgets/ElevatedButton.dart';
-import '../../UserPortal/DashboardComponents/ViewDetailsPage.dart';
 
 class PrivateSessionCard extends StatelessWidget {
   final Map<String, dynamic> service;

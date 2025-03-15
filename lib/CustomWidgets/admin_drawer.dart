@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CommonScreens/welcome.dart';
 import 'package:get/get.dart';
 import '../CustomDialogBoxes/logout_dialog.dart';
-import 'AppColors.dart';
 import 'TextWidget.dart';
 
 class AdminDrawer extends StatelessWidget {

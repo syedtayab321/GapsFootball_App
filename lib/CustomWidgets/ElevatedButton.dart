@@ -8,7 +8,7 @@ class CustomElevatedButton extends StatelessWidget {
   final VoidCallback path;
   final double? padding,radius,fontsize,width,height;
 
-  const CustomElevatedButton({
+  const CustomElevatedButton({super.key, 
     required this.text,
     required this.color,
     required this.path,
