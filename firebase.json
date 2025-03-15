@@ -1,0 +1,25 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "gapsfootball-629d1",
+          "appId": "1:1027565913417:android:ce5e9ef9f0e0470e410698",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "gapsfootball-629d1",
+          "configurations": {
+            "android": "1:1027565913417:android:ce5e9ef9f0e0470e410698",
+            "ios": "1:1027565913417:ios:52ca3d121c88d1c4410698",
+            "macos": "1:1027565913417:ios:52ca3d121c88d1c4410698",
+            "web": "1:1027565913417:web:dc5e35368d5566c2410698",
+            "windows": "1:1027565913417:web:edab1d2f60081ac9410698"
+          }
+        }
+      }
+    }
+  }
+}

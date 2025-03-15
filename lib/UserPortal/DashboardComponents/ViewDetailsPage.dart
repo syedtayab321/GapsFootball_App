@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/ElevatedButton.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import 'package:gaps_football_app/UserPortal/OtherPages/ConversationPage.dart';
 import 'package:get/get.dart';
 
 class ViewDetailsPage extends StatelessWidget {
@@ -123,7 +122,6 @@ class ViewDetailsPage extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: (){
-                        Get.to(ConversationPage());
                       },
                       child: const Icon(
                         Icons.message,

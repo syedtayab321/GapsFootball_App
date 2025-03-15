@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1027565913417",
+    "project_id": "gapsfootball-629d1",
+    "storage_bucket": "gapsfootball-629d1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027565913417:android:ce5e9ef9f0e0470e410698",
+        "android_client_info": {
+          "package_name": "com.example.gaps_football_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPHz-6iwW5s8ZtI8RVN93zB4dBCguDP8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

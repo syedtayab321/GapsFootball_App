@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gaps_football_app/CommonScreens/SignUpScreen.dart';
+import 'package:gaps_football_app/Controllers/login_controller.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
+import 'package:gaps_football_app/CustomWidgets/ElevatedButton.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import 'package:gaps_football_app/UserPortal/UserDashboardPage.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,9 +13,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-
+  final LoginController loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 5),
                     TextFormField(
-                      controller: _emailController,
+                      controller: loginController.emailController,
                       keyboardType: TextInputType.emailAddress,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -114,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 5),
                     TextFormField(
-                      controller: _passwordController,
+                      controller:loginController.passwordController,
                       obscureText: true,
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
@@ -139,28 +138,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 30),
                     SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // if (_formKey.currentState!.validate()) {
-                          // }
-                          Get.to(UserDashboardPage());
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:AppColors.lightGolden,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                        ),
-                        child: const CustomTextWidget(
-                          title: "Login",
+                        width: double.infinity,
+                        child:Obx((){
+                          return loginController.isLoading.value?Center(child: CircularProgressIndicator()):
+                          CustomElevatedButton(
+                            path:loginController.login,
                             color: Colors.white,
-                            size: 16,
-                            weight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                            backcolor: AppColors.lightGolden,
+                            text: 'Login',
+                            radius: 10,
+                            padding: 10,
+                          );
+                        })
+                    ),
                     const SizedBox(height: 15),
                     Center(
                       child: Column(

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:gaps_football_app/CustomWidgets/Snakbar.dart';
 import 'package:get/get.dart';
 import 'package:gaps_football_app/CustomWidgets/AppColors.dart';
 import 'package:gaps_football_app/CustomWidgets/TextWidget.dart';
-import '../../Controllers/RatingController.dart';
+import '../../Controllers/rating_controller.dart';
+import '../Backend Operations/add_feedback.dart';
 
 class FeedbackPage extends StatelessWidget {
   final FeedbackController feedbackController = Get.put(FeedbackController());
+  final TextEditingController feedbackTextController = TextEditingController();
+  final FeedbackService feedbackService = FeedbackService();
+
   FeedbackPage({super.key});
 
   @override
@@ -48,6 +53,7 @@ class FeedbackPage extends StatelessWidget {
             _buildStarRating(),
             SizedBox(height: 30),
             TextField(
+              controller: feedbackTextController,
               maxLines: 5,
               decoration: InputDecoration(
                 hintText: 'Write your feedback here...',
@@ -75,15 +81,8 @@ class FeedbackPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              onPressed: () {
-                Get.snackbar(
-                  'Feedback Received',
-                  'Thank you for your feedback!',
-                  backgroundColor: AppColors.lightGolden,
-                  colorText: Colors.black,
-                  snackPosition: SnackPosition.BOTTOM,
-                  duration: Duration(seconds: 2),
-                );
+              onPressed: () async {
+                await _submitFeedback();
               },
               child: Ink(
                 decoration: BoxDecoration(
@@ -149,5 +148,24 @@ class FeedbackPage extends StatelessWidget {
         )),
       ],
     );
+  }
+
+  Future<void> _submitFeedback() async {
+    final String feedbackText = feedbackTextController.text.trim();
+    final int rating = feedbackController.rating.value.toInt();
+
+    if (feedbackText.isEmpty || rating == 0) {
+       showErrorSnackbar('Please provide both feedback and a rating!');
+      return;
+    }
+
+    try {
+      await feedbackService.saveFeedback(feedback: feedbackText, rating: rating);
+      showSuccessSnackbar('Thank you for your feedback!');
+      feedbackTextController.clear();
+      feedbackController.updateRating(0);
+    } catch (e) {
+      showErrorSnackbar('Failed to submit feedback. Please try again later.');
+    }
   }
 }
