@@ -1,0 +1,2 @@
+G:/Projects/App Projects/Football/GapsFootball_App/android/app/.cxx/Debug/l6w2j45j/armeabi-v7a/CMakeFiles/edit_cache.dir
+G:/Projects/App Projects/Football/GapsFootball_App/android/app/.cxx/Debug/l6w2j45j/armeabi-v7a/CMakeFiles/rebuild_cache.dir
